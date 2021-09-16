@@ -28,6 +28,8 @@
         <p id="loading-title">Đang tải dữ liệu</p>
       </div>
     </transition>
+
+    <v-icon id="scrollToTop" @click="topFunc">mdi-arrow-up-circle</v-icon>
   </div>
 </template>
 
@@ -72,6 +74,28 @@ export default {
         this.show_loading = false;
       }
     },
+    topFunc: function() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    },
+  },
+  mounted() {
+    let scrollToTop = document.getElementById("scrollToTop");
+
+    window.onscroll = function() {
+      scrollFunction();
+    };
+
+    function scrollFunction() {
+      if (
+        document.body.scrollTop > 500 ||
+        document.documentElement.scrollTop > 500
+      ) {
+        scrollToTop.style.visibility = "visible";
+      } else {
+        scrollToTop.style.visibility = "hidden";
+      }
+    }
   },
 };
 </script>
@@ -219,5 +243,26 @@ export default {
     transform: perspective(140px) rotateY(180deg);
     opacity: 0;
   }
+}
+
+#scrollToTop {
+  visibility: hidden;
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  z-index: 99;
+  background-color: white;
+  padding: 5px;
+  border-radius: 5px;
+  color: #262c7c;
+  cursor: pointer;
+  height: 34px;
+  vertical-align: unset !important;
+}
+
+#scrollToTop:hover {
+  background-color: whitesmoke;
+  border-radius: 50px;
+  color: #3e1969;
 }
 </style>

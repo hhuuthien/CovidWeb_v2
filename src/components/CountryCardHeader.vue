@@ -1,21 +1,37 @@
 <template>
-  <div id="country-card-main">
-    <p id="p1">{{ p1 }}</p>
-    <p id="p2">{{ p2 }}</p>
-    <p id="p3">{{ p3 }}</p>
-    <p id="p4">{{ p4 }}</p>
+  <div id="country-card-header-main">
+    <div id="cch1">
+      <p id="p1"></p>
+      <p id="p2">Số ca nhiễm</p>
+      <p id="p3">Số ca khỏi</p>
+      <p id="p4">Số ca tử vong</p>
+    </div>
+    <div id="divider"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "CountryCard",
-  props: ["p1", "p2", "p3", "p4"],
+  name: "CountryCardHeader",
 };
 </script>
 
 <style scoped>
-#country-card-main {
+#divider {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin-top: 2px;
+}
+
+#country-card-header-main {
+  padding: 0 8px;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+#cch1 {
   width: 100%;
   height: 38px;
   margin-top: 2px;
@@ -23,19 +39,6 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: 0 8px;
-}
-
-#country-card-main:hover {
-  background-color: rgb(244, 245, 255);
-  cursor: pointer;
-  border-radius: 5px;
-  transition: 0.3s ease;
-}
-
-#country-card-main:hover > #p1 {
-  font-weight: bold;
-  transition: 0.3s ease;
 }
 
 #p1 {
@@ -71,5 +74,9 @@ export default {
   width: 20%;
   background-color: rgb(236, 236, 236);
   color: rgb(0, 0, 0);
+}
+
+#country-card-header-main:hover {
+  cursor: pointer;
 }
 </style>

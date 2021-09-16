@@ -7,12 +7,23 @@
       </div>
       <div id="nav-right">
         <ul>
-          <router-link :class="activeClass[0]" to="/">Việt Nam</router-link>
-          <router-link :class="activeClass[1]" to="/world"
+          <router-link :class="activeClass[0]" @click.native="active(0)" to="/"
+            >Việt Nam</router-link
+          >
+          <router-link
+            :class="activeClass[1]"
+            @click.native="active(1)"
+            to="/world"
             >Thế giới</router-link
           >
-          <router-link :class="activeClass[2]" to="/">Vaccine</router-link>
-          <router-link class="" to="/admin">
+          <router-link :class="activeClass[2]" @click.native="active(2)" to="/"
+            >Vaccine</router-link
+          >
+          <router-link
+            :class="activeClass[3]"
+            @click.native="active(3)"
+            to="/admin"
+          >
             Admin
           </router-link>
         </ul>
@@ -26,8 +37,28 @@ export default {
   name: "Navbar",
   data() {
     return {
-      activeClass: ["", "active", ""],
+      activeClass: ["active", "", "", ""],
     };
+  },
+  methods: {
+    active: function(val) {
+      switch (val) {
+        case 0:
+          this.activeClass = ["active", "", "", ""];
+          break;
+        case 1:
+          this.activeClass = ["", "active", "", ""];
+          break;
+        case 2:
+          this.activeClass = ["", "", "active", ""];
+          break;
+        case 3:
+          this.activeClass = ["", "", "", "active"];
+          break;
+        default:
+          break;
+      }
+    },
   },
 };
 </script>
