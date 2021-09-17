@@ -3,8 +3,10 @@
     <div id="cch1">
       <p id="p1"></p>
       <p id="p2">Số ca nhiễm</p>
+      <p id="p22">Mới</p>
       <p id="p3">Số ca khỏi</p>
       <p id="p4">Số ca tử vong</p>
+      <p id="p44">Mới</p>
     </div>
     <div id="divider"></div>
   </div>
@@ -42,13 +44,15 @@ export default {
 }
 
 #p1 {
-  width: 35%;
+  width: 26%;
   font-size: 0.9rem;
 }
 
 #p2,
+#p22,
 #p3,
-#p4 {
+#p4,
+#p44 {
   font-size: 0.8rem;
   border-radius: 3px;
   height: 30px;
@@ -56,22 +60,35 @@ export default {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-align: center;
 }
 
 #p2 {
-  width: 20%;
+  width: 16%;
+  background-color: rgb(255, 241, 241);
+  color: rgb(255, 45, 45);
+}
+
+#p22 {
+  width: 11%;
   background-color: rgb(255, 241, 241);
   color: rgb(255, 45, 45);
 }
 
 #p3 {
-  width: 20%;
+  width: 16%;
   background-color: rgb(236, 255, 242);
   color: rgb(0, 165, 55);
 }
 
 #p4 {
-  width: 20%;
+  width: 16%;
+  background-color: rgb(236, 236, 236);
+  color: rgb(0, 0, 0);
+}
+
+#p44 {
+  width: 11%;
   background-color: rgb(236, 236, 236);
   color: rgb(0, 0, 0);
 }

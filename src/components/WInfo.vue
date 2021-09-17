@@ -1,7 +1,7 @@
 <template>
   <div id="winfo-main">
     <div id="card-overview">
-      <img src="../assets/worldwide.png" />
+      <img src="../assets/worldwide2.png" />
       <div id="card-overview-content">
         <p id="coc-1">Số liệu thống kê</p>
         <p id="coc-2">Thế giới</p>
@@ -42,43 +42,25 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/database";
-import { getConfig } from "../js/func";
-
 export default {
   name: "WInfo",
+  props: ["mainData"],
   data() {
     return {
       arrayData: [0, 0, 0, 0, 0, 0],
     };
   },
-  mounted() {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(getConfig());
-    } else {
-      firebase.app();
-    }
-
-    firebase
-      .database()
-      .ref()
-      .child("api/worldSummary")
-      .get()
-      .then((snapshot) => {
-        let data = snapshot.val().data[0].table_world;
-        this.arrayData = [
-          data.total_cases,
-          data.new_cases,
-          data.total_recovered,
-          data.new_recovered,
-          data.total_deaths,
-          data.new_deaths,
-        ];
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  watch: {
+    mainData: function(mainData) {
+      this.arrayData = [
+        mainData.total_cases,
+        mainData.new_cases,
+        mainData.total_recovered,
+        mainData.new_recovered,
+        mainData.total_deaths,
+        mainData.new_deaths,
+      ];
+    },
   },
 };
 </script>

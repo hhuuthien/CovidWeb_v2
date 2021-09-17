@@ -1,23 +1,40 @@
 <template>
   <div id="mainw-main">
     <w-map />
-    <w-info />
+    <w-info :mainData="tableWorld" />
     <div id="mainw-below">
-      <w-list />
+      <w-list :mainData="tableCountry" />
+      <div id="mainw-below-sub">
+        <w-chart :mainData="chartData" />
+      </div>
     </div>
+    <w-footer />
 
     <v-icon id="scrollToTop" @click="topFunc">mdi-arrow-up-circle</v-icon>
   </div>
 </template>
 
 <script>
+import WChart from "./WChart.vue";
 import WInfo from "./WInfo.vue";
 import WList from "./WList.vue";
 import WMap from "./WMap.vue";
+import WFooter from "./WFooter.vue";
+
+import firebase from "firebase/app";
+import "firebase/database";
+import { getConfig } from "../js/func";
 
 export default {
   name: "MainW",
-  components: { WMap, WList, WInfo },
+  components: { WMap, WList, WInfo, WChart, WFooter },
+  data() {
+    return {
+      chartData: null,
+      tableCountry: null,
+      tableWorld: null,
+    };
+  },
   mounted() {
     let scrollToTop = document.getElementById("scrollToTop");
 
@@ -35,6 +52,26 @@ export default {
         scrollToTop.style.visibility = "hidden";
       }
     }
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(getConfig());
+    } else {
+      firebase.app();
+    }
+
+    firebase
+      .database()
+      .ref()
+      .child("api/worldSummary")
+      .get()
+      .then((snapshot) => {
+        this.chartData = snapshot.val().data[0].chart;
+        this.tableCountry = snapshot.val().data[0].table_country;
+        this.tableWorld = snapshot.val().data[0].table_world;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   },
   methods: {
     topFunc: function() {
@@ -54,7 +91,11 @@ export default {
   justify-content: space-between;
   align-items: flex-start;
   margin-top: 125px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+}
+
+#mainw-below-sub {
+  width: 30%;
 }
 
 #scrollToTop {

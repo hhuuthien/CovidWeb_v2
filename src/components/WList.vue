@@ -6,55 +6,39 @@
       :key="country.id"
       :p1="country.country"
       :p2="country.total_cases"
-      :p3="country.total_recovered === '' ? '0' : country.total_recovered"
-      :p4="country.total_deaths === '' ? '0' : country.total_deaths"
+      :p22="country.new_cases"
+      :p3="country.total_recovered"
+      :p4="country.total_deaths"
+      :p44="country.new_deaths"
     />
   </div>
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/database";
-import { getConfig, beautifyWorldData } from "../js/func";
+import { beautifyWorldData } from "../js/func";
 import CountryCard from "./CountryCard.vue";
 import CountryCardHeader from "./CountryCardHeader.vue";
 
 export default {
   name: "WList",
   components: { CountryCard, CountryCardHeader },
+  props: ["mainData"],
   data() {
     return {
       storeData: null,
     };
   },
-  mounted() {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(getConfig());
-    } else {
-      firebase.app();
-    }
-
-    firebase
-      .database()
-      .ref()
-      .child("api/worldSummary")
-      .get()
-      .then((snapshot) => {
-        let myData = (this.storeData = beautifyWorldData(
-          snapshot.val().data[0].table_country
-        ));
-        this.storeData = myData;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  watch: {
+    mainData: function(mainData) {
+      this.storeData = beautifyWorldData(mainData);
+    },
   },
 };
 </script>
 
 <style scoped>
 #wlist-main {
-  width: 50%;
+  width: 68%;
   font-family: "Nunito", sans-serif;
   background-color: white;
   border-radius: 5px;
