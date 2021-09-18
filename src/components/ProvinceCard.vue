@@ -36,17 +36,22 @@ export default {
 
 #province-card-main:hover > #p1 {
   font-weight: bold;
-  transition: 0.3s ease;
 }
 
 #province-card-main:hover > #p2 {
-  background-color: rgb(255, 225, 225);
-  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+#province-card-main:hover > #p3 {
+  font-weight: bold;
 }
 
 #province-card-main:hover > #p4 {
-  background-color: rgb(218, 218, 218);
-  transition: 0.3s ease;
+  font-weight: bold;
+}
+
+#province-card-main:hover > #p5 {
+  font-weight: bold;
 }
 
 #p1 {

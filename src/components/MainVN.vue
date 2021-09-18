@@ -1,7 +1,7 @@
 <template>
   <div id="mainvn-main">
-    <info-bar />
-    <div id="mainvn-main-below">
+    <info-bar v-show="!show_loading" />
+    <div id="mainvn-main-below" v-show="!show_loading">
       <province-bar
         @dataForMap="transferData"
         @dataForChart3="transferData2"
@@ -15,7 +15,7 @@
         <contact />
       </div>
     </div>
-    <footer-bar />
+    <footer-bar v-show="!show_loading" />
 
     <transition name="fade">
       <div id="loading-vn" v-show="show_loading">
@@ -118,7 +118,7 @@ export default {
 
 #loading-vn {
   position: fixed;
-  top: 0;
+  top: 70px;
   bottom: 0;
   left: 0;
   right: 0;

@@ -37,7 +37,26 @@ export default {
 
 #country-card-main:hover > #p1 {
   font-weight: bold;
-  transition: 0.3s ease;
+}
+
+#country-card-main:hover > #p2 {
+  font-weight: bold;
+}
+
+#country-card-main:hover > #p22 {
+  font-weight: bold;
+}
+
+#country-card-main:hover > #p3 {
+  font-weight: bold;
+}
+
+#country-card-main:hover > #p4 {
+  font-weight: bold;
+}
+
+#country-card-main:hover > #p44 {
+  font-weight: bold;
 }
 
 #p1 {
