@@ -1,18 +1,18 @@
 <template>
-  <div id="province-card-main">
+  <div id="country-card-main">
     Không có kết quả
   </div>
 </template>
 
 <script>
 export default {
-  name: "ProvinceCardEmpty",
+  name: "CountryCardEmpty",
 };
 </script>
 
 <style scoped>
-#province-card-main {
-  width: 94%;
+#country-card-main {
+  width: 100%;
   height: 38px;
   margin-top: 2px;
   display: flex;

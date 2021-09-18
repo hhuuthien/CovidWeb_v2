@@ -10,7 +10,7 @@
         prepend-inner-icon="mdi-card-search"
       ></v-text-field>
     </div>
-    <province-card-header v-show="showHeader" @clicked_emit="clicked_emit" />
+    <province-card-header @clicked_emit="clicked_emit" />
     <province-card-empty v-show="showEmpty" />
     <province-card
       v-for="i in province"
@@ -45,7 +45,6 @@ export default {
       keyword: "",
       province: [],
       provinceCopy: [],
-      showHeader: true,
       showEmpty: false,
     };
   },
@@ -129,12 +128,16 @@ export default {
       }
       if (pWhat === "p2") {
         this.province.sort(compare1);
+        this.provinceCopy.sort(compare1);
       } else if (pWhat === "p3") {
         this.province.sort(compare2);
+        this.provinceCopy.sort(compare2);
       } else if (pWhat === "p4") {
         this.province.sort(compare4);
+        this.provinceCopy.sort(compare4);
       } else if (pWhat === "p5") {
         this.province.sort(compare5);
+        this.provinceCopy.sort(compare5);
       }
     },
   },
@@ -149,11 +152,9 @@ export default {
         } else {
           this.showEmpty = false;
         }
-        this.showHeader = false;
       } else {
         this.province = this.provinceCopy;
         this.showEmpty = false;
-        this.showHeader = true;
       }
     },
   },
@@ -176,7 +177,7 @@ export default {
 }
 
 #province-search {
-  width: 94%;
+  width: calc(94% - 16px);
   margin-bottom: 8px;
 }
 
