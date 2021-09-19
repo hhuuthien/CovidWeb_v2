@@ -349,7 +349,24 @@ const beautifyWorldData = (array) => {
       element.country !== "Oceania"
     );
   });
-  return filterArray;
+
+  let resultArray = [];
+
+  filterArray.forEach((element) => {
+    let temp = {
+      country: element.country,
+      country_vn: element.country_vn,
+      new_cases: element.new_cases,
+      new_deaths: element.new_deaths,
+      total_cases: element.total_cases,
+      total_deaths: element.total_deaths,
+      total_recovered: element.total_recovered,
+      continent: findContinentOfCountry(element.country),
+    };
+    resultArray.push(temp);
+  });
+
+  return resultArray;
 };
 
 const getDataHCKEYtoMap = (array, countryName, hckey) => {
@@ -366,6 +383,907 @@ const getDataHCKEYtoMap = (array, countryName, hckey) => {
   return result;
 };
 
+const findContinentOfCountry = (name) => {
+  let continent = "";
+  switch (name) {
+    case "USA": {
+      continent = "bmy";
+      break;
+    }
+    case "Ấn Độ": {
+      continent = "a";
+      break;
+    }
+    case "Brazil": {
+      continent = "nmy";
+      break;
+    }
+    case "UK": {
+      continent = "au";
+      break;
+    }
+    case "Nga": {
+      continent = "au";
+      break;
+    }
+    case "Pháp": {
+      continent = "au";
+      break;
+    }
+    case "Turkey": {
+      continent = "a";
+      break;
+    }
+    case "Iran": {
+      continent = "a";
+      break;
+    }
+    case "Argentina": {
+      continent = "nmy";
+      break;
+    }
+    case "Colombia": {
+      continent = "nmy";
+      break;
+    }
+    case "Tây Ban Nha": {
+      continent = "au";
+      break;
+    }
+    case "Italy": {
+      continent = "au";
+      break;
+    }
+    case "Indonesia": {
+      continent = "a";
+      break;
+    }
+    case "Đức": {
+      continent = "au";
+      break;
+    }
+    case "Mexico": {
+      continent = "bmy";
+      break;
+    }
+    case "Poland": {
+      continent = "au";
+      break;
+    }
+    case "South Africa": {
+      continent = "phi";
+      break;
+    }
+    case "Ukraine": {
+      continent = "au";
+      break;
+    }
+    case "Philippines": {
+      continent = "a";
+      break;
+    }
+    case "Peru": {
+      continent = "nmy";
+      break;
+    }
+    case "Malaysia": {
+      continent = "a";
+      break;
+    }
+    case "Netherlands": {
+      continent = "au";
+      break;
+    }
+    case "Iraq": {
+      continent = "a";
+      break;
+    }
+    case "Czechia": {
+      continent = "au";
+      break;
+    }
+    case "Chile": {
+      continent = "nmy";
+      break;
+    }
+    case "Nhật Bản": {
+      continent = "a";
+      break;
+    }
+    case "Canada": {
+      continent = "bmy";
+      break;
+    }
+    case "Bangladesh": {
+      continent = "a";
+      break;
+    }
+    case "Thái Lan": {
+      continent = "a";
+      break;
+    }
+    case "Belgium": {
+      continent = "au";
+      break;
+    }
+    case "Pakistan": {
+      continent = "a";
+      break;
+    }
+    case "Israel": {
+      continent = "a";
+      break;
+    }
+    case "Thụy Điển": {
+      continent = "au";
+      break;
+    }
+    case "Romania": {
+      continent = "au";
+      break;
+    }
+    case "Portugal": {
+      continent = "au";
+      break;
+    }
+    case "Morocco": {
+      continent = "phi";
+      break;
+    }
+    case "Kazakhstan": {
+      continent = "a";
+      break;
+    }
+    case "Serbia": {
+      continent = "au";
+      break;
+    }
+    case "Switzerland": {
+      continent = "au";
+      break;
+    }
+    case "Hungary": {
+      continent = "au";
+      break;
+    }
+    case "Jordan": {
+      continent = "a";
+      break;
+    }
+    case "Nepal": {
+      continent = "a";
+      break;
+    }
+    case "Cuba": {
+      continent = "bmy";
+      break;
+    }
+    case "UAE": {
+      continent = "a";
+      break;
+    }
+    case "Austria": {
+      continent = "au";
+      break;
+    }
+    case "Tunisia": {
+      continent = "phi";
+      break;
+    }
+    case "Việt Nam": {
+      continent = "a";
+      break;
+    }
+    case "Greece": {
+      continent = "au";
+      break;
+    }
+    case "Lebanon": {
+      continent = "a";
+      break;
+    }
+    case "Georgia": {
+      continent = "a";
+      break;
+    }
+    case "Saudi Arabia": {
+      continent = "a";
+      break;
+    }
+    case "Guatemala": {
+      continent = "bmy";
+      break;
+    }
+    case "Belarus": {
+      continent = "au";
+      break;
+    }
+    case "Ecuador": {
+      continent = "nmy";
+      break;
+    }
+    case "Costa Rica": {
+      continent = "bmy";
+      break;
+    }
+    case "Bolivia": {
+      continent = "nmy";
+      break;
+    }
+    case "Sri Lanka": {
+      continent = "a";
+      break;
+    }
+    case "Bulgaria": {
+      continent = "au";
+      break;
+    }
+    case "Azerbaijan": {
+      continent = "a";
+      break;
+    }
+    case "Panama": {
+      continent = "bmy";
+      break;
+    }
+    case "Paraguay": {
+      continent = "nmy";
+      break;
+    }
+    case "Myanmar": {
+      continent = "a";
+      break;
+    }
+    case "Kuwait": {
+      continent = "a";
+      break;
+    }
+    case "Slovakia": {
+      continent = "au";
+      break;
+    }
+    case "Uruguay": {
+      continent = "nmy";
+      break;
+    }
+    case "Croatia": {
+      continent = "au";
+      break;
+    }
+    case "Palestine": {
+      continent = "a";
+      break;
+    }
+    case "Ireland": {
+      continent = "au";
+      break;
+    }
+    case "Dominican Republic": {
+      continent = "bmy";
+      break;
+    }
+    case "Honduras": {
+      continent = "bmy";
+      break;
+    }
+    case "Denmark": {
+      continent = "au";
+      break;
+    }
+    case "Venezuela": {
+      continent = "nmy";
+      break;
+    }
+    case "Libya": {
+      continent = "phi";
+      break;
+    }
+    case "Ethiopia": {
+      continent = "phi";
+      break;
+    }
+    case "Lithuania": {
+      continent = "au";
+      break;
+    }
+    case "Oman": {
+      continent = "a";
+      break;
+    }
+    case "Egypt": {
+      continent = "phi";
+      break;
+    }
+    case "Slovenia": {
+      continent = "au";
+      break;
+    }
+    case "Moldova": {
+      continent = "au";
+      break;
+    }
+    case "Hàn Quốc": {
+      continent = "a";
+      break;
+    }
+    case "Bahrain": {
+      continent = "a";
+      break;
+    }
+    case "Mongolia": {
+      continent = "a";
+      break;
+    }
+    case "Armenia": {
+      continent = "a";
+      break;
+    }
+    case "Kenya": {
+      continent = "phi";
+      break;
+    }
+    case "Qatar": {
+      continent = "a";
+      break;
+    }
+    case "Bosnia and Herzegovina": {
+      continent = "au";
+      break;
+    }
+    case "Zambia": {
+      continent = "phi";
+      break;
+    }
+    case "Algeria": {
+      continent = "phi";
+      break;
+    }
+    case "Nigeria": {
+      continent = "phi";
+      break;
+    }
+    case "North Macedonia": {
+      continent = "au";
+      break;
+    }
+    case "Norway": {
+      continent = "au";
+      break;
+    }
+    case "Kyrgyzstan": {
+      continent = "a";
+      break;
+    }
+    case "Botswana": {
+      continent = "phi";
+      break;
+    }
+    case "Uzbekistan": {
+      continent = "a";
+      break;
+    }
+    case "Albania": {
+      continent = "au";
+      break;
+    }
+    case "Afghanistan": {
+      continent = "a";
+      break;
+    }
+    case "Mozambique": {
+      continent = "phi";
+      break;
+    }
+    case "Latvia": {
+      continent = "au";
+      break;
+    }
+    case "Estonia": {
+      continent = "au";
+      break;
+    }
+    case "Phần Lan": {
+      continent = "au";
+      break;
+    }
+    case "Zimbabwe": {
+      continent = "phi";
+      break;
+    }
+    case "Namibia": {
+      continent = "phi";
+      break;
+    }
+    case "Ghana": {
+      continent = "phi";
+      break;
+    }
+    case "Montenegro": {
+      continent = "au";
+      break;
+    }
+    case "Uganda": {
+      continent = "phi";
+      break;
+    }
+    case "Cyprus": {
+      continent = "a";
+      break;
+    }
+    case "Campuchia": {
+      continent = "a";
+      break;
+    }
+    case "El Salvador": {
+      continent = "bmy";
+      break;
+    }
+    case "Trung Quốc": {
+      continent = "a";
+      break;
+    }
+    case "Rwanda": {
+      continent = "phi";
+      break;
+    }
+    case "Cameroon": {
+      continent = "phi";
+      break;
+    }
+    case "Maldives": {
+      continent = "a";
+      break;
+    }
+    case "Jamaica": {
+      continent = "bmy";
+      break;
+    }
+    case "Australia": {
+      continent = "dd";
+      break;
+    }
+    case "Luxembourg": {
+      continent = "au";
+      break;
+    }
+    case "Senegal": {
+      continent = "phi";
+      break;
+    }
+    case "Singapore": {
+      continent = "a";
+      break;
+    }
+    case "Malawi": {
+      continent = "phi";
+      break;
+    }
+    case "Ivory Coast": {
+      continent = "phi";
+      break;
+    }
+    case "DRC": {
+      continent = "phi";
+      break;
+    }
+    case "Réunion": {
+      continent = "phi";
+      break;
+    }
+    case "Guadeloupe": {
+      continent = "bmy";
+      break;
+    }
+    case "Angola": {
+      continent = "phi";
+      break;
+    }
+    case "Fiji": {
+      continent = "dd";
+      break;
+    }
+    case "Trinidad and Tobago": {
+      continent = "bmy";
+      break;
+    }
+    case "Eswatini": {
+      continent = "phi";
+      break;
+    }
+    case "Madagascar": {
+      continent = "phi";
+      break;
+    }
+    case "French Polynesia": {
+      continent = "dd";
+      break;
+    }
+    case "Martinique": {
+      continent = "bmy";
+      break;
+    }
+    case "Sudan": {
+      continent = "phi";
+      break;
+    }
+    case "French Guiana": {
+      continent = "nmy";
+      break;
+    }
+    case "Malta": {
+      continent = "au";
+      break;
+    }
+    case "Cabo Verde": {
+      continent = "phi";
+      break;
+    }
+    case "Mauritania": {
+      continent = "phi";
+      break;
+    }
+    case "Suriname": {
+      continent = "nmy";
+      break;
+    }
+    case "Guinea": {
+      continent = "phi";
+      break;
+    }
+    case "Syria": {
+      continent = "a";
+      break;
+    }
+    case "Guyana": {
+      continent = "nmy";
+      break;
+    }
+    case "Gabon": {
+      continent = "phi";
+      break;
+    }
+    case "Togo": {
+      continent = "phi";
+      break;
+    }
+    case "Benin": {
+      continent = "phi";
+      break;
+    }
+    case "Haiti": {
+      continent = "bmy";
+      break;
+    }
+    case "Seychelles": {
+      continent = "phi";
+      break;
+    }
+    case "Mayotte": {
+      continent = "phi";
+      break;
+    }
+    case "Bahamas": {
+      continent = "bmy";
+      break;
+    }
+    case "Timor-Leste": {
+      continent = "a";
+      break;
+    }
+    case "Somalia": {
+      continent = "phi";
+      break;
+    }
+    case "Papua New Guinea": {
+      continent = "dd";
+      break;
+    }
+    case "Belize": {
+      continent = "bmy";
+      break;
+    }
+    case "Laos": {
+      continent = "a";
+      break;
+    }
+    case "Tajikistan": {
+      continent = "a";
+      break;
+    }
+    case "Đài Loan": {
+      continent = "a";
+      break;
+    }
+    case "Curaçao": {
+      continent = "bmy";
+      break;
+    }
+    case "Aruba": {
+      continent = "bmy";
+      break;
+    }
+    case "Andorra": {
+      continent = "au";
+      break;
+    }
+    case "Mali": {
+      continent = "phi";
+      break;
+    }
+    case "Lesotho": {
+      continent = "phi";
+      break;
+    }
+    case "Burundi": {
+      continent = "phi";
+      break;
+    }
+    case "Burkina Faso": {
+      continent = "phi";
+      break;
+    }
+    case "Mauritius": {
+      continent = "phi";
+      break;
+    }
+    case "Congo": {
+      continent = "phi";
+      break;
+    }
+    case "Nicaragua": {
+      continent = "bmy";
+      break;
+    }
+    case "Hong Kong": {
+      continent = "a";
+      break;
+    }
+    case "Djibouti": {
+      continent = "phi";
+      break;
+    }
+    case "South Sudan": {
+      continent = "phi";
+      break;
+    }
+    case "CAR": {
+      continent = "phi";
+      break;
+    }
+    case "Iceland": {
+      continent = "au";
+      break;
+    }
+    case "Channel Islands": {
+      continent = "au";
+      break;
+    }
+    case "Equatorial Guinea": {
+      continent = "phi";
+      break;
+    }
+    case "Saint Lucia": {
+      continent = "bmy";
+      break;
+    }
+    case "Gambia": {
+      continent = "phi";
+      break;
+    }
+    case "Yemen": {
+      continent = "a";
+      break;
+    }
+    case "Isle of Man": {
+      continent = "au";
+      break;
+    }
+    case "Eritrea": {
+      continent = "phi";
+      break;
+    }
+    case "Sierra Leone": {
+      continent = "phi";
+      break;
+    }
+    case "Barbados": {
+      continent = "bmy";
+      break;
+    }
+    case "Guinea-Bissau": {
+      continent = "phi";
+      break;
+    }
+    case "Niger": {
+      continent = "phi";
+      break;
+    }
+    case "Liberia": {
+      continent = "phi";
+      break;
+    }
+    case "Gibraltar": {
+      continent = "au";
+      break;
+    }
+    case "San Marino": {
+      continent = "au";
+      break;
+    }
+    case "Chad": {
+      continent = "phi";
+      break;
+    }
+    case "Brunei": {
+      continent = "a";
+      break;
+    }
+    case "Comoros": {
+      continent = "phi";
+      break;
+    }
+    case "Sint Maarten": {
+      continent = "bmy";
+      break;
+    }
+    case "New Zealand": {
+      continent = "dd";
+      break;
+    }
+    case "Bermuda": {
+      continent = "bmy";
+      break;
+    }
+    case "Saint Martin": {
+      continent = "bmy";
+      break;
+    }
+    case "Liechtenstein": {
+      continent = "au";
+      break;
+    }
+    case "Monaco": {
+      continent = "au";
+      break;
+    }
+    case "Sao Tome and Principe": {
+      continent = "phi";
+      break;
+    }
+    case "Turks and Caicos": {
+      continent = "bmy";
+      break;
+    }
+    case "Grenada": {
+      continent = "bmy";
+      break;
+    }
+    case "British Virgin Islands": {
+      continent = "bmy";
+      break;
+    }
+    case "Dominica": {
+      continent = "bmy";
+      break;
+    }
+    case "Bhutan": {
+      continent = "a";
+      break;
+    }
+    case "St. Vincent Grenadines": {
+      continent = "bmy";
+      break;
+    }
+    case "Antigua and Barbuda": {
+      continent = "bmy";
+      break;
+    }
+    case "Caribbean Netherlands": {
+      continent = "bmy";
+      break;
+    }
+    case "St. Barth": {
+      continent = "bmy";
+      break;
+    }
+    case "Saint Kitts and Nevis": {
+      continent = "bmy";
+      break;
+    }
+    case "Tanzania": {
+      continent = "phi";
+      break;
+    }
+    case "New Caledonia": {
+      continent = "dd";
+      break;
+    }
+    case "Faeroe Islands": {
+      continent = "au";
+      break;
+    }
+    case "Cayman Islands": {
+      continent = "bmy";
+      break;
+    }
+    case "Diamond Princess": {
+      continent = "";
+      break;
+    }
+    case "Wallis and Futuna": {
+      continent = "dd";
+      break;
+    }
+    case "Greenland": {
+      continent = "bmy";
+      break;
+    }
+    case "Anguilla": {
+      continent = "bmy";
+      break;
+    }
+    case "Falkland Islands": {
+      continent = "nmy";
+      break;
+    }
+    case "Macau": {
+      continent = "a";
+      break;
+    }
+    case "Montserrat": {
+      continent = "bmy";
+      break;
+    }
+    case "Saint Pierre Miquelon": {
+      continent = "bmy";
+      break;
+    }
+    case "Vatican City": {
+      continent = "au";
+      break;
+    }
+    case "Solomon Islands": {
+      continent = "dd";
+      break;
+    }
+    case "Western Sahara": {
+      continent = "phi";
+      break;
+    }
+    case "MS Zaandam": {
+      continent = "";
+      break;
+    }
+    case "Vanuatu": {
+      continent = "dd";
+      break;
+    }
+    case "Marshall Islands": {
+      continent = "dd";
+      break;
+    }
+    case "Palau": {
+      continent = "dd";
+      break;
+    }
+    case "Samoa": {
+      continent = "dd";
+      break;
+    }
+    case "Saint Helena": {
+      continent = "phi";
+      break;
+    }
+    case "Micronesia": {
+      continent = "dd";
+      break;
+    }
+    default:
+      break;
+  }
+  return continent;
+};
+
 export {
   getConfig,
   getAppDate,
@@ -379,4 +1297,5 @@ export {
   shuffleArray,
   beautifyWorldData,
   getDataHCKEYtoMap,
+  findContinentOfCountry,
 };
