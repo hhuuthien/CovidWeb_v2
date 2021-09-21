@@ -1,14 +1,14 @@
 <template>
-  <div id="news-main">
-    <div id="news-title">Tin tức</div>
-    <div id="news-news">
+  <div id="wnews-main">
+    <div id="wnews-title">Tin tức</div>
+    <div id="wnews-news">
       <news-card
         v-for="news in newsData"
         :key="news.id"
         :title="news.title"
         :image="news.thumbnail_url"
         :link="news.share_url"
-        :isHigh="false"
+        :isHigh="true"
       />
     </div>
   </div>
@@ -21,7 +21,7 @@ import { getConfig, shuffleArray } from "../js/func";
 import NewsCard from "./NewsCard.vue";
 
 export default {
-  name: "News",
+  name: "WNews",
   components: { NewsCard },
   data() {
     return {
@@ -49,7 +49,7 @@ export default {
           );
         });
         let dataShuffle = shuffleArray(dataFilter);
-        this.newsData = dataShuffle.slice(0, 6);
+        this.newsData = dataShuffle.slice(0, 36);
       })
       .catch((error) => {
         console.error(error);
@@ -59,26 +59,25 @@ export default {
 </script>
 
 <style scoped>
-#news-main {
+#wnews-main {
   width: 100%;
+  font-family: "Nunito", sans-serif;
   background-color: white;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  font-family: "Nunito", sans-serif;
   padding: 15px;
-  margin-bottom: 20px;
 }
 
-#news-title {
+#wnews-title {
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 15px;
 }
 
-#news-news {
+#wnews-news {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr;
   column-gap: 15px;
-  row-gap: 15px;
+  row-gap: 14px;
 }
 </style>

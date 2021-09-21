@@ -225,5 +225,6 @@ export default {
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   padding: 15px;
+  margin-bottom: 20px;
 }
 </style>

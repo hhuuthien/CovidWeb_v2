@@ -1,5 +1,6 @@
 <template>
   <div id="country-card-main">
+    <p id="p0">{{ index }}</p>
     <p id="p1">{{ p1 }}</p>
     <p id="p2">{{ p2 }}</p>
     <p id="p22">{{ p22 }}</p>
@@ -12,14 +13,14 @@
 <script>
 export default {
   name: "CountryCard",
-  props: ["p1", "p2", "p22", "p3", "p4", "p44"],
+  props: ["p1", "p2", "p22", "p3", "p4", "p44", "index"],
 };
 </script>
 
 <style scoped>
 #country-card-main {
   width: 100%;
-  height: 38px;
+  height: 32px;
   margin-top: 2px;
   display: flex;
   flex-direction: row;
@@ -59,9 +60,20 @@ export default {
   font-weight: bold;
 }
 
+#p0 {
+  width: 3%;
+  font-size: 0.7rem;
+}
+
 #p1 {
-  width: 26%;
-  font-size: 0.9rem;
+  width: 28%;
+  font-size: 0.8rem;
+  /* text-overflow css */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 #p2,
@@ -80,31 +92,31 @@ export default {
 }
 
 #p2 {
-  width: 16%;
+  width: 15%;
   background-color: rgb(255, 241, 241);
   color: rgb(255, 45, 45);
 }
 
 #p22 {
-  width: 11%;
+  width: 10%;
   background-color: rgb(255, 241, 241);
   color: rgb(255, 45, 45);
 }
 
 #p3 {
-  width: 16%;
+  width: 15%;
   background-color: rgb(236, 255, 242);
   color: rgb(0, 165, 55);
 }
 
 #p4 {
-  width: 16%;
+  width: 15%;
   background-color: rgb(236, 236, 236);
   color: rgb(0, 0, 0);
 }
 
 #p44 {
-  width: 11%;
+  width: 10%;
   background-color: rgb(236, 236, 236);
   color: rgb(0, 0, 0);
 }

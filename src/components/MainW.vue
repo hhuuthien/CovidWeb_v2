@@ -1,11 +1,13 @@
 <template>
   <div id="mainw-main">
-    <w-map v-show="!show_loading" />
+    <w-map v-show="!show_loading" :mainData="worldMap" />
     <w-info :mainData="tableWorld" v-show="!show_loading" />
     <div id="mainw-below" v-show="!show_loading">
       <w-list :mainData="tableCountry" />
       <div id="mainw-below-sub">
+        <w-map-2 :mainData="tableCountry" />
         <w-chart :mainData="chartData" />
+        <w-news />
       </div>
     </div>
     <w-footer v-show="!show_loading" />
@@ -31,7 +33,9 @@ import WChart from "./WChart.vue";
 import WInfo from "./WInfo.vue";
 import WList from "./WList.vue";
 import WMap from "./WMap.vue";
+import WMap2 from "./WMap2.vue";
 import WFooter from "./WFooter.vue";
+import WNews from "./WNews.vue";
 
 import firebase from "firebase/app";
 import "firebase/database";
@@ -39,13 +43,14 @@ import { getConfig } from "../js/func";
 
 export default {
   name: "MainW",
-  components: { WMap, WList, WInfo, WChart, WFooter },
+  components: { WMap, WMap2, WList, WInfo, WChart, WFooter, WNews },
   data() {
     return {
       chartData: null,
       tableCountry: null,
       tableWorld: null,
       show_loading: true,
+      worldMap: null,
     };
   },
   mounted() {
@@ -72,15 +77,26 @@ export default {
       firebase.app();
     }
 
+    let date = new Date();
+    let x =
+      date.getFullYear() + "i" + (date.getMonth() + 1) + "i" + date.getDate();
+
     firebase
       .database()
       .ref()
-      .child("api/worldSummary")
+      .child("apiWorld")
+      .child(x)
+      .orderByKey()
+      .limitToLast(1)
       .get()
       .then((snapshot) => {
-        this.chartData = snapshot.val().data[0].chart;
-        this.tableCountry = snapshot.val().data[0].table_country;
-        this.tableWorld = snapshot.val().data[0].table_world;
+        let latestData = Object.values(snapshot.val())[0];
+        let worldSummary = latestData.worldSummary;
+
+        this.chartData = worldSummary.data[0].chart;
+        this.tableCountry = worldSummary.data[0].table_country;
+        this.tableWorld = worldSummary.data[0].table_world;
+        this.worldMap = latestData.worldMap;
 
         this.show_loading = false;
       })

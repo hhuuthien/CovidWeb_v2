@@ -8,6 +8,7 @@
         dense
         clearable
         prepend-inner-icon="mdi-card-search"
+        autocomplete="off"
       ></v-text-field>
     </div>
     <province-card-header @clicked_emit="clicked_emit" />

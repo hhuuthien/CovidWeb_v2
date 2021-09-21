@@ -10,12 +10,10 @@
 
 <script>
 import { getWCoreMap } from "../js/wCoreMap";
-import firebase from "firebase/app";
-import "firebase/database";
-import { getConfig } from "../js/func";
 
 export default {
   name: "WMap",
+  props: ["mainData"],
   data() {
     return {
       chartOptions: {
@@ -139,27 +137,13 @@ export default {
       },
     };
   },
+  watch: {
+    mainData: function(mainData) {
+      this.chartOptions.series[0].data = mainData;
+    },
+  },
   mounted() {
     this.chartOptions.chart.map = getWCoreMap();
-
-    if (!firebase.apps.length) {
-      firebase.initializeApp(getConfig());
-    } else {
-      firebase.app();
-    }
-
-    firebase
-      .database()
-      .ref()
-      .child("api/worldMap")
-      .get()
-      .then((snapshot) => {
-        let data = snapshot.val();
-        this.chartOptions.series[0].data = data;
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   },
 };
 </script>

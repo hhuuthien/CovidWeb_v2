@@ -118,12 +118,12 @@ export default {
 #nav-right ul a:hover {
   cursor: pointer;
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  transition: 0.5s ease;
+  border-radius: 20px;
+  transition: 0.3s ease;
 }
 
 .active {
   background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+  border-radius: 20px;
 }
 </style>

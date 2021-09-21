@@ -13,7 +13,7 @@ export default {
 <style scoped>
 #country-card-main {
   width: 100%;
-  height: 38px;
+  height: 32px;
   margin-top: 2px;
   display: flex;
   flex-direction: row;
