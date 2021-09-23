@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import MainVN from "../components/MainVN.vue";
 import MainW from "../components/MainW.vue";
+import MainVac from "../components/MainVac.vue";
 import Admin from "../components/Admin.vue";
 
 Vue.use(VueRouter);
@@ -14,6 +15,10 @@ const routes = [
   {
     path: "/world",
     component: MainW,
+  },
+  {
+    path: "/vaccine",
+    component: MainVac,
   },
   {
     path: "/admin",

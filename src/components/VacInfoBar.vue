@@ -1,27 +1,24 @@
 <template>
-  <div id="info-main">
+  <div id="vacinfo-main">
     <div id="info-content">
       <div id="info-left">
-        <p id="info-p1">TÌNH HÌNH ĐẠI DỊCH COVID-19</p>
+        <p id="info-p1">VACCINE COVID-19</p>
         <p id="info-p2">
-          Đại dịch Covid-19 do virus SARS-CoV-2 gây ra có trường hợp nhiễm bệnh
-          đầu tiên tại Việt Nam vào ngày 23 tháng 1 năm 2020. Các hoạt động khác
-          nhau để kiểm soát dịch đã được thực hiện như hạn chế tự do di chuyển
-          hay triển khai khai báo y tế. Sức khoẻ con người, kinh tế, xã hội bị
-          ảnh hưởng nghiêm trọng bởi đại dịch trên khắp đất nước.
+          Cùng với những biện pháp xét nghiệm và phòng chống dịch hiệu quả,
+          vaccine là công cụ quan trọng giúp kiểm soát đại dịch Covid-19. Một số
+          loại vaccine như Astra Zeneca, Pfizer, Moderna, ... đã vượt qua quá
+          trình kiểm duyệt nghiêm ngặt của nhiều cơ quan quản lý nhà nước trên
+          thế giới và bắt đầu được tiêm chủng rộng rãi. Tại Việt Nam, vaccine đã
+          và đang được tiêm cho toàn bộ người dân trên 18 tuổi.
         </p>
         <div id="info-button">
           <v-btn rounded id="info-btn1"
-            ><v-icon left> mdi-login-variant </v-icon>ĐĂNG KÍ TIÊM
-            VACCINE</v-btn
-          >
-          <v-btn rounded id="info-btn2"
-            ><v-icon left> mdi-medical-bag </v-icon>KHAI BÁO Y TẾ</v-btn
+            ><v-icon left> mdi-medical-bag </v-icon>ĐĂNG KÍ TIÊM VACCINE</v-btn
           >
         </div>
       </div>
       <div id="info-right">
-        <img src="../assets/mask.png" alt="Mask" />
+        <img src="../assets/vaccine.png" alt="Vaccine" />
       </div>
     </div>
     <img src="../assets/v1.png" id="v1" />
@@ -29,46 +26,34 @@
     <img src="../assets/v3.png" id="v3" />
     <!-- <img src="../assets/v4.png" id="v4" /> -->
     <div id="info-status">
-      <div id="card-overview">
-        <img src="../assets/vietnam.png" />
-        <div id="card-overview-content">
-          <p id="coc-1">Số liệu thống kê</p>
-          <p id="coc-2">Việt Nam</p>
-          <div id="coc-3-wrap">
-            <p id="coc-3">•{{ live }}</p>
-            <date-picker :data="dataFromFirebase" />
-          </div>
-        </div>
-      </div>
       <div id="card-main" class="card-main-red">
         <div id="card-img">
-          <img src="../assets/virus-red.png" />
+          <img src="../assets/vaccine-dose.png" />
         </div>
         <div id="card-content">
-          <p id="card-content-1">Số ca nhiễm</p>
+          <p id="card-content-1">Tổng số người đã tiêm</p>
           <p id="card-content-2">{{ arrayData[0] }}</p>
-          <p id="card-content-3">+{{ arrayData[1] }} {{ suffix }}</p>
+          <p id="card-content-3">{{ arrayData[1] }}% dân số</p>
         </div>
-        <detail-bar :data="dataFromFirebase" />
       </div>
       <div id="card-main" class="card-main-green">
         <div id="card-img">
-          <img src="../assets/virus-green.png" />
+          <img src="../assets/dose1.png" />
         </div>
         <div id="card-content">
-          <p id="card-content-1">Số ca khỏi</p>
+          <p id="card-content-1">Tiêm chưa đủ liều</p>
           <p id="card-content-2">{{ arrayData[2] }}</p>
-          <p id="card-content-3">+{{ arrayData[3] }} {{ suffix }}</p>
+          <p id="card-content-3">{{ arrayData[3] }}% dân số</p>
         </div>
       </div>
       <div id="card-main" class="card-main-grey">
         <div id="card-img">
-          <img src="../assets/virus-grey.png" />
+          <img src="../assets/dose2.png" />
         </div>
         <div id="card-content">
-          <p id="card-content-1">Số ca tử vong</p>
+          <p id="card-content-1">Tiêm đủ liều</p>
           <p id="card-content-2">{{ arrayData[4] }}</p>
-          <p id="card-content-3">+{{ arrayData[5] }} {{ suffix }}</p>
+          <p id="card-content-3">{{ arrayData[5] }}% dân số</p>
         </div>
       </div>
     </div>
@@ -76,63 +61,27 @@
 </template>
 
 <script>
-import firebase from "firebase/app";
-import "firebase/database";
-import { getAppDate, getConfig } from "../js/func.js";
-import DatePicker from "./DatePicker.vue";
-import DetailBar from "./DetailBar.vue";
-
 export default {
-  name: "InfoBar",
-  components: { DatePicker, DetailBar },
+  name: "VacInfoBar",
+  props: ["mainData"],
   data() {
     return {
-      arrayData: [],
-      dataFromFirebase: null,
-      live: "",
-      suffix: "",
+      arrayData: [0, 0, 0, 0, 0, 0],
     };
   },
-  mounted() {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(getConfig());
-    } else {
-      firebase.app();
-    }
+  watch: {
+    mainData: function(mainData) {
+      let vietnamPopulation = 96500000;
 
-    firebase
-      .database()
-      .ref()
-      .child("api/vietnamSummary")
-      .get()
-      .then((snapshot) => {
-        let data = snapshot.val();
-        this.dataFromFirebase = data;
+      let temp0 = mainData.totalPeople.toLocaleString();
+      let temp1 = ((mainData.totalPeople / vietnamPopulation) * 100).toFixed(1);
+      let temp2 = mainData.people_t1.toLocaleString();
+      let temp3 = ((mainData.people_t1 / vietnamPopulation) * 100).toFixed(1);
+      let temp4 = mainData.people_t2.toLocaleString();
+      let temp5 = ((mainData.people_t2 / vietnamPopulation) * 100).toFixed(1);
 
-        if (getAppDate(2, 2, "/") === getAppDate(1, 2, "/")) {
-          this.live = "LIVE";
-          this.suffix = "hôm nay";
-        } else {
-          this.live = "HÔM QUA";
-          this.suffix = "hôm qua";
-        }
-
-        let dataFilter = data.filter(function(e) {
-          return e.day === getAppDate(2, 2, "/");
-        });
-
-        let temp0 = (dataFilter[0].totalCase + 53).toLocaleString();
-        let temp1 = dataFilter[0].newCase.toLocaleString();
-        let temp2 = dataFilter[0].totalRecover.toLocaleString();
-        let temp3 = dataFilter[0].newRecover.toLocaleString();
-        let temp4 = dataFilter[0].totalDeath.toLocaleString();
-        let temp5 = dataFilter[0].newDeath.toLocaleString();
-
-        this.arrayData = [temp0, temp1, temp2, temp3, temp4, temp5];
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      this.arrayData = [temp0, temp1, temp2, temp3, temp4, temp5];
+    },
   },
 };
 </script>
@@ -142,7 +91,7 @@ export default {
   --size: 400px;
 }
 
-#info-main {
+#vacinfo-main {
   background-color: #262c7c;
   width: 100%;
   height: var(--size);
@@ -161,11 +110,11 @@ export default {
 }
 
 #info-right img {
-  height: 300px;
+  height: 250px;
 }
 
 #info-right img:hover {
-  height: 330px;
+  height: 280px;
   transition: 0.5s ease;
   cursor: pointer;
 }
@@ -202,13 +151,6 @@ export default {
 }
 
 #info-btn1 {
-  background-color: whitesmoke;
-  margin-right: 10px;
-  color: black;
-  letter-spacing: normal;
-}
-
-#info-btn2 {
   background-color: #f37c7c;
   letter-spacing: normal;
   margin-right: 10px;

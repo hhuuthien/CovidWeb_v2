@@ -9,7 +9,7 @@
         <ul>
           <router-link :class="ac[0]" to="/">Việt Nam</router-link>
           <router-link :class="ac[1]" to="/world">Thế giới</router-link>
-          <router-link :class="ac[2]" to="/">Vaccine</router-link>
+          <router-link :class="ac[2]" to="/vaccine">Vaccine</router-link>
           <router-link :class="ac[3]" to="/admin">
             Admin
           </router-link>

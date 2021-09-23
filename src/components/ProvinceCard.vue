@@ -57,6 +57,12 @@ export default {
 #p1 {
   width: 35%;
   font-size: 0.9rem;
+  /* text-overflow css */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
 }
 
 #p2,

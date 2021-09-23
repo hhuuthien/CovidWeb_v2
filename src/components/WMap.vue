@@ -28,8 +28,8 @@ export default {
           enabled: true,
           enableDoubleClickZoomTo: true,
           buttonOptions: {
-            verticalAlign: "top",
-            align: "left",
+            verticalAlign: "bottom",
+            align: "right",
             theme: {
               r: 5, //radius
               fill: "white",
@@ -150,9 +150,9 @@ export default {
 
 <style>
 #wmap-main {
-  width: 100%;
+  width: 85%;
+  margin: auto;
   height: 400px;
-  background-color: #262c7c;
   font-family: "Nunito", sans-serif;
 }
 

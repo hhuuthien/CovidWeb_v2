@@ -6,6 +6,7 @@
       <button @click="get3">Get Vietnam Province Death Data</button>
       <button @click="get4">Get Vietnam News</button>
       <button @click="get5">Get World Data</button>
+      <button @click="get6">Get Vaccine Data</button>
     </div>
     <div id="right-main">
       <p id="console">Waiting ...</p>
@@ -404,6 +405,63 @@ export default {
         .catch(function(error) {
           let cText = document.getElementById("console").innerHTML;
           cText = cText + "<br>Function 5 (Get World Data): ERROR<br>" + error;
+          document.getElementById("console").innerHTML = cText;
+        });
+    },
+    get6() {
+      let cText = document.getElementById("console").innerHTML;
+      cText = cText + "<br>Function 6 (Get Vaccine Data): STARTED";
+      document.getElementById("console").innerHTML = cText;
+
+      const options = {
+        method: "GET",
+        url:
+          "https://vnexpress.net/microservice/sheet/type/vaccine_data_vietnam",
+      };
+
+      axios
+        .request(options)
+        .then(function(res) {
+          const myjson = csv2json(res.data.toString(), {
+            parseNumbers: true,
+            parseJSON: true,
+          });
+
+          let array = new Array();
+          myjson.forEach((element) => {
+            let data = {
+              day: element["Ngày"],
+              people_t1: element["Số người tiêm chưa đủ mũi"],
+              people_t1_day: element["Số người tiêm chưa đủ mũi theo ngày"],
+              people_t2: element["Số người tiêm đủ mũi"],
+              people_t2_day: element["Số người tiêm đủ mũi theo ngày"],
+              totalDose: element["Tổng số mũi đã tiêm"],
+              totalPeople: element["Tổng số người đã tiêm"],
+              totalPeople_day: element["Tổng số người đã tiêm theo ngày"],
+            };
+            array.push(data);
+          });
+
+          firebase
+            .database()
+            .ref("apiVaccine/vaccineSummary")
+            .set(array)
+            .then(function() {
+              let cText = document.getElementById("console").innerHTML;
+              cText = cText + "<br>Function 6 (Get Vaccine Data): DONE";
+              document.getElementById("console").innerHTML = cText;
+            })
+            .catch(function(error) {
+              let cText = document.getElementById("console").innerHTML;
+              cText =
+                cText + "<br>Function 6 (Get Vaccine Data): ERROR<br>" + error;
+              document.getElementById("console").innerHTML = cText;
+            });
+        })
+        .catch(function(error) {
+          let cText = document.getElementById("console").innerHTML;
+          cText =
+            cText + "<br>Function 6 (Get Vaccine Data): ERROR<br>" + error;
           document.getElementById("console").innerHTML = cText;
         });
     },
