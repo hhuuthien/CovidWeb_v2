@@ -22,10 +22,13 @@
       </div>
     </div>
 
-    <country-card-header />
+    <country-empty v-show="showNoData" />
+
+    <country-card-header v-show="!showNoData" />
     <country-card-empty v-show="showEmpty" />
 
     <country-card
+      v-show="!showNoData"
       v-for="country in storeData"
       :key="country.id"
       :p1="country.country"
@@ -45,11 +48,17 @@ import "firebase/database";
 import { beautifyWorldData, getConfig, stringToSlug } from "../js/func";
 import CountryCard from "./CountryCard.vue";
 import CountryCardEmpty from "./CountryCardEmpty.vue";
+import CountryEmpty from "./CountryEmpty.vue";
 import CountryCardHeader from "./CountryCardHeader.vue";
 
 export default {
   name: "WList",
-  components: { CountryCard, CountryCardHeader, CountryCardEmpty },
+  components: {
+    CountryCard,
+    CountryCardHeader,
+    CountryCardEmpty,
+    CountryEmpty,
+  },
   props: ["mainData"],
   data() {
     return {
@@ -58,6 +67,7 @@ export default {
       rootData: null,
       keyword: "",
       showEmpty: false,
+      showNoData: false,
       tab: "Thế giới",
       items: [
         "Thế giới",
@@ -139,6 +149,7 @@ export default {
       this.keyword = null;
       switch (val) {
         case "Hôm nay": {
+          this.showNoData = false;
           this.rootData = beautifyWorldData(this.mainData);
           this.storeData = this.rootData;
           this.storeDataCopy = this.rootData;
@@ -177,7 +188,10 @@ export default {
                 this.storeData = this.rootData;
                 this.storeDataCopy = this.rootData;
               } else {
-                console.error("Không có dữ liệu");
+                this.rootData = [];
+                this.storeData = [];
+                this.storeDataCopy = [];
+                this.showNoData = true;
               }
             })
             .catch((error) => {

@@ -1,6 +1,6 @@
 <template>
-  <div data-app id="vac-chart1-main">
-    <div id="chart-title">Số người đã tiêm vaccine theo ngày</div>
+  <div data-app id="vac-chart2-main">
+    <div id="chart-title">Tổng số người đã tiêm vaccine</div>
     <div id="chart-subtitle">Tính từ ngày 7/3/2021</div>
     <div id="chart-option">
       <v-btn-toggle v-model="toggle" mandatory>
@@ -22,7 +22,7 @@ import { Chart } from "highcharts-vue";
 import { getAppDate } from "../js/func";
 
 export default {
-  name: "VacChart1",
+  name: "VacChart2",
   props: ["mainData"],
   components: {
     highcharts: Chart,
@@ -37,7 +37,7 @@ export default {
       selected: "Chưa đủ liều",
       chartOptions: {
         chart: {
-          type: "column",
+          type: "area",
           height: 300,
           style: {
             fontFamily: "Nunito",
@@ -93,6 +93,13 @@ export default {
             animation: {
               duration: 500,
             },
+            fillColor: {
+              linearGradient: [0, 0, 0, 300],
+              stops: [
+                [0, "rgba(82, 87, 255,0.5)"],
+                [1, "rgba(255, 255, 255,0.5)"],
+              ],
+            },
           },
         },
       },
@@ -107,16 +114,8 @@ export default {
       let today = getAppDate(2, 2, "/");
 
       mainData.some((element) => {
-        if (element.people_t1_day < 0) {
-          arrayData1.push(0);
-        } else {
-          arrayData1.push(element.people_t1_day);
-        }
-        if (element.people_t2_day < 0) {
-          arrayData2.push(0);
-        } else {
-          arrayData2.push(element.people_t2_day);
-        }
+        arrayData1.push(element.people_t1);
+        arrayData2.push(element.people_t2);
         arrayCategory.push(element.day);
 
         if (element.day === today) {
@@ -130,7 +129,7 @@ export default {
 
       this.chartOptions.series[0].data = arrayData1;
       this.chartOptions.series[0].name =
-        "Số người đã tiêm vaccine theo ngày (chưa đủ liều)";
+        "Tổng số người đã tiêm vaccine (chưa đủ liều)";
       this.chartOptions.xAxis.categories = arrayCategory;
       this.chartOptions.xAxis.labels.step = 15;
     },
@@ -138,7 +137,7 @@ export default {
       switch (val) {
         case "Chưa đủ liều":
           this.chartOptions.series[0].name =
-            "Số người đã tiêm vaccine theo ngày (chưa đủ liều)";
+            "Tổng số người đã tiêm vaccine (chưa đủ liều)";
 
           if (this.toggle === 0) {
             this.chartOptions.series[0].data = this.arrayData1;
@@ -157,7 +156,7 @@ export default {
 
         case "Đủ liều":
           this.chartOptions.series[0].name =
-            "Số người đã tiêm vaccine theo ngày (đủ liều)";
+            "Tổng số người đã tiêm vaccine (đủ liều)";
           if (this.toggle === 0) {
             this.chartOptions.series[0].data = this.arrayData2;
             this.chartOptions.xAxis.categories = this.arrayCategory;
@@ -186,11 +185,11 @@ export default {
           if (this.selected === "Chưa đủ liều") {
             this.chartOptions.series[0].data = this.arrayData1;
             this.chartOptions.series[0].name =
-              "Số người đã tiêm vaccine theo ngày (chưa đủ liều)";
+              "Tổng số người đã tiêm vaccine (chưa đủ liều)";
           } else if (this.selected === "Đủ liều") {
             this.chartOptions.series[0].data = this.arrayData2;
             this.chartOptions.series[0].name =
-              "Số người đã tiêm vaccine theo ngày (đủ liều)";
+              "Tổng số người đã tiêm vaccine (đủ liều)";
           }
           break;
 
@@ -205,13 +204,13 @@ export default {
               this.arrayData1.length - 30
             );
             this.chartOptions.series[0].name =
-              "Số người đã tiêm vaccine theo ngày (chưa đủ liều)";
+              "Tổng số người đã tiêm vaccine (chưa đủ liều)";
           } else if (this.selected === "Đủ liều") {
             this.chartOptions.series[0].data = this.arrayData2.slice(
               this.arrayData2.length - 30
             );
             this.chartOptions.series[0].name =
-              "Số người đã tiêm vaccine theo ngày (đủ liều)";
+              "Tổng số người đã tiêm vaccine (đủ liều)";
           }
           break;
 
@@ -224,7 +223,7 @@ export default {
 </script>
 
 <style scoped>
-#vac-chart1-main {
+#vac-chart2-main {
   width: 49%;
   background-color: white;
   border-radius: 5px;

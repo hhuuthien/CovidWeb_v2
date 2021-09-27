@@ -7,6 +7,7 @@
       <button @click="get4">Get Vietnam News</button>
       <button @click="get5">Get World Data</button>
       <button @click="get6">Get Vaccine Data</button>
+      <button @click="get7">Get Vaccine To Vietnam</button>
     </div>
     <div id="right-main">
       <p id="console">Waiting ...</p>
@@ -464,6 +465,66 @@ export default {
             cText + "<br>Function 6 (Get Vaccine Data): ERROR<br>" + error;
           document.getElementById("console").innerHTML = cText;
         });
+    },
+    get7() {
+      let cText = document.getElementById("console").innerHTML;
+      cText = cText + "<br>Function 7 (Get Vaccine To Vietnam): STARTED";
+      document.getElementById("console").innerHTML = cText;
+
+      // const options = {
+      //   method: "GET",
+      //   url: "https://vnexpress.net/microservice/sheet/type/vaccine_to_vietnam",
+      // };
+
+      // axios
+      //   .request(options)
+      //   .then(function(res) {
+      //     const myjson = csv2json(res.data.toString(), {
+      //       parseNumbers: true,
+      //       parseJSON: true,
+      //     });
+
+      //     let array = new Array();
+      //     myjson.forEach((element) => {
+      //       let data = {
+      //         day: element["Ngày"],
+      //         people_t1: element["Số người tiêm chưa đủ mũi"],
+      //         people_t1_day: element["Số người tiêm chưa đủ mũi theo ngày"],
+      //         people_t2: element["Số người tiêm đủ mũi"],
+      //         people_t2_day: element["Số người tiêm đủ mũi theo ngày"],
+      //         totalDose: element["Tổng số mũi đã tiêm"],
+      //         totalPeople: element["Tổng số người đã tiêm"],
+      //         totalPeople_day: element["Tổng số người đã tiêm theo ngày"],
+      //       };
+      //       array.push(data);
+      //     });
+
+      //     firebase
+      //       .database()
+      //       .ref("apiVaccine/vaccineSummary")
+      //       .set(array)
+      //       .then(function() {
+      //         let cText = document.getElementById("console").innerHTML;
+      //         cText = cText + "<br>Function 7 (Get Vaccine To Vietnam): DONE";
+      //         document.getElementById("console").innerHTML = cText;
+      //       })
+      //       .catch(function(error) {
+      //         let cText = document.getElementById("console").innerHTML;
+      //         cText =
+      //           cText +
+      //           "<br>Function 7 (Get Vaccine To Vietnam): ERROR<br>" +
+      //           error;
+      //         document.getElementById("console").innerHTML = cText;
+      //       });
+      //   })
+      //   .catch(function(error) {
+      //     let cText = document.getElementById("console").innerHTML;
+      //     cText =
+      //       cText +
+      //       "<br>Function 7 (Get Vaccine To Vietnam): ERROR<br>" +
+      //       error;
+      //     document.getElementById("console").innerHTML = cText;
+      //   });
     },
   },
 };
