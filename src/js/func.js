@@ -1537,6 +1537,16 @@ const adminGet5Function = (data) => {
   return arrayMap;
 };
 
+const vaccineTypeFunction = (x) => {
+  if (x === "") {
+    return 0;
+  } else if (typeof x === "string" || x instanceof String) {
+    return Number(x.replaceAll(".", ""));
+  } else {
+    return x * 1000;
+  }
+};
+
 export {
   getConfig,
   getAppDate,
@@ -1552,4 +1562,5 @@ export {
   getDataHCKEYtoMap,
   findContinentOfCountry,
   adminGet5Function,
+  vaccineTypeFunction,
 };

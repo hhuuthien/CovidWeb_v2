@@ -11,11 +11,11 @@
           ảnh hưởng nghiêm trọng bởi đại dịch trên khắp đất nước.
         </p>
         <div id="info-button">
-          <v-btn rounded id="info-btn1"
+          <v-btn rounded id="info-btn11"
             ><v-icon left> mdi-login-variant </v-icon>ĐĂNG KÍ TIÊM
             VACCINE</v-btn
           >
-          <v-btn rounded id="info-btn2"
+          <v-btn rounded id="info-btn22"
             ><v-icon left> mdi-medical-bag </v-icon>KHAI BÁO Y TẾ</v-btn
           >
         </div>
@@ -201,14 +201,14 @@ export default {
   justify-content: flex-start;
 }
 
-#info-btn1 {
+#info-btn11 {
   background-color: whitesmoke;
   margin-right: 10px;
   color: black;
   letter-spacing: normal;
 }
 
-#info-btn2 {
+#info-btn22 {
   background-color: #f37c7c;
   letter-spacing: normal;
   margin-right: 10px;

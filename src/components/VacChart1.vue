@@ -78,7 +78,8 @@ export default {
             y: 5,
             format: "{value:.,0f}",
             formatter: function() {
-              return this.value / 1000 + "K";
+              if (this.value < 1000000) return this.value / 1000 + "K";
+              else return this.value / 1000000 + "M";
             },
           },
           showFirstLabel: false,
